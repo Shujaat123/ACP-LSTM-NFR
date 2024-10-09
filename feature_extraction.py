@@ -360,7 +360,7 @@ def get_4_nucleotide_composition(tris, seq, pythoncount=True):
 
     return tri_feature
 
-def prepare_feature_acp344_2(pos_all_seq_path, neg_1_1, neg_ind):
+def prepare_feature_acp344_2(pos_all_seq_path, neg_1_1):
     label = []
     protein_seq_dict = {}
     groups = ['AGV', 'ILFP', 'YMTS', 'HNQW', 'RK', 'DE', 'C']
@@ -369,7 +369,7 @@ def prepare_feature_acp344_2(pos_all_seq_path, neg_1_1, neg_ind):
     bpf=[]
     kmer=[]
     # get protein feature
-    protein_seq_dict1 = prepare_feature_acp344(pos_all_seq_path, neg_1_1, neg_ind)
+    protein_seq_dict1 = prepare_feature_acp344(pos_all_seq_path, neg_1_1)
     protein_seq_dict={}
     label=[]
     index=0
