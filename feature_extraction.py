@@ -32,8 +32,7 @@ from sklearn.metrics import auc, average_precision_score, precision_recall_curve
 import tensorflow
 import re
 import pandas as pd
-!pip install wget
-import wget
+
 
 """## Functions for loading sequences
 
