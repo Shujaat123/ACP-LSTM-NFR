@@ -525,7 +525,7 @@ def Calculate_Stats(y_actual,y_pred):
   return acc, sen, spe, f1, mcc, bacc, yi
 
 
-def load_seq_data(data_path,label):
+def load_seq_data_2(data_path,label):
   dataset = pd.read_csv(data_path,names=None,index_col=0, header=None)
   seq = []
   sample_count = 0
@@ -536,6 +536,19 @@ def load_seq_data(data_path,label):
       array = [label, row[0]]
       name, sequence = array[0].split()[0], re.sub('[^ARNDCQEGHILKMFPSTWYV-]', '', ''.join(array[1:]).upper())
       seq.append([name, sequence])
+
+  print('# of ' + label + ' samples',sample_count)
+  return seq
+
+def load_seq_data(data_path,label):
+  seq = []
+  sample_count = 0
+  with open(data_path, 'r') as fp:
+    for line in fp:
+      if line[0] != '>':
+        sequence = line[:-1]
+        sample_count = sample_count +1
+        seq.append([label, sequence])
 
   print('# of ' + label + ' samples',sample_count)
   return seq
