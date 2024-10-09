@@ -36,36 +36,49 @@ import pandas as pd
 
 """## Functions for loading sequences
 
-We use separate *txt* files for the positive and negative sequences
+We use separate *txt* files for the sequence dataset
 """
 
-def load_seq_data(data_path,label):
-  seq = []
-  sample_count = 0
-  with open(data_path, 'r') as fp:
-    for line in fp:
-      if line[0] != '>':
-        sequence = line[:-1]
-        sample_count = sample_count +1
-        seq.append([label, sequence])
+def prepare_feature_acp740_2(path):
+    path = path
+    new_list=[]
+    seq_list=[]
+    label = []
+    lis = []
+    lx=[]
+    interaction_pair = {}
+    RNA_seq_dict = {}
+    protein_seq_dict = {}
+    protein_index = 0
+    with open(path, 'r') as fp:
+        for line in fp:
+            if line[0] == '>':
+                values = line[1:].strip().split('|')
+                label_temp = values[1]
+                proteinName = values[0]
+                proteinName_1=proteinName.split("_")
+                new_list.append(proteinName_1[0])
 
-  print('# of ' + label + ' samples',sample_count)
-  return seq
-
-def prepare_feature_acp344(pos_all_seq_path, neg_all_seq_path):
-    pos_all_seq = load_seq_data(pos_all_seq_path,'ACP')
-    neg_all_seq = load_seq_data(neg_all_seq_path,'non-ACP')
-
-    ALL_seq = pos_all_seq + neg_all_seq
-
-    print(len(pos_all_seq), len(neg_all_seq), len(ALL_seq))
-    return ALL_seq
-
-"""## Feature encoding functions"""
+                if label_temp == '1':
+                    label.append(1)
+                else:
+                    label.append(0)
+            else:
+                seq = line[:-1]
+                seq_list.append(seq)
+        for i, item in enumerate(new_list):
+            lis.append([item, seq_list[i]])
+        for i in lis:
+            if len(i[1])>60:
+                x=([i[0],i[1][0:60]])
+                lx.append(x)
+            else:
+                lx.append(i)
+    return lx
 
 def Isoelectric_Point(seq):
     AA = 'ACDEFGHIKLMNPQRSTVWY'
-    x,y,z,w=1,2,4,8
+    x,y,z,w=1,2,4,8#16,2,1,1
     ip_val={
         'A':(6.11)*x  +(2.35)*y  +(9.87)*z,
         'C':(5.15)*x  +(1.92)*y  +(10.70)*z    +(8.37)*w,
@@ -192,12 +205,10 @@ def minSequenceLength(fastas):
 def CKSSCP(fastas, gap1=5,gap2=4, **kw):
     if gap1 < 0:
         print('Error: the gap should be equal or greater than zero' + '\n\n')
-        print('Sequence:', str(fastas))
         return 0
 
     if minSequenceLength(fastas) < gap1+2:
         print('Error: all the sequence length should be larger than the (gap value) + 2 = ' + str(gap1+2) + '\n' + 'Current sequence length ='  + str(minSequenceLength(fastas)) + '\n\n')
-        print('Sequence:', str(fastas))
         return 0
 
     if gap2 < 0:
@@ -206,7 +217,6 @@ def CKSSCP(fastas, gap1=5,gap2=4, **kw):
 
     if minSequenceLength(fastas) < gap2+2:
         print('Error: all the sequence length should be larger than the (gap value) + 2 = ' + str(gap2+2) + '\n' + 'Current sequence length ='  + str(minSequenceLength(fastas)) + '\n\n')
-        print('Sequence:', str(fastas))
         return 0
 
     AA = 'ACDEFGHIKLMNPQRSTVWY'
@@ -360,28 +370,35 @@ def get_4_nucleotide_composition(tris, seq, pythoncount=True):
 
     return tri_feature
 
-def prepare_feature_acp344_2(pos_all_seq_path, neg_1_1):
+def prepare_feature_acp740(path):
     label = []
+    interaction_pair = {}
+    RNA_seq_dict = {}
     protein_seq_dict = {}
+    protein_index = 0
+    with open(path, 'r') as fp:
+        for line in fp:
+            if line[0] == '>':
+                values = line[1:].strip().split('|')
+                label_temp = values[1]
+                proteinName = values[0]
+                if label_temp == '1':
+                    label.append(1)
+                else:
+                    label.append(0)
+            else:
+                seq = line[:-1]
+                protein_seq_dict[protein_index] = seq
+                protein_index = protein_index + 1
+    # name_list = read_name_from_lncRNA_fasta('ncRNA-protein/lncRNA_RNA.fa')
     groups = ['AGV', 'ILFP', 'YMTS', 'HNQW', 'RK', 'DE', 'C']
     group_dict = TransDict_from_list(groups)
     protein_tris = get_3_protein_trids()
+    # tris3 = get_3_trids()
     bpf=[]
     kmer=[]
     # get protein feature
-    protein_seq_dict1 = prepare_feature_acp344(pos_all_seq_path, neg_1_1)
-    protein_seq_dict={}
-    label=[]
-    index=0
-    for i,x in protein_seq_dict1:
-        protein_seq_dict[index]=x
-        if(i=='ACP'):
-            label.append(1)
-        else:
-            label.append(0)
-        index+=1
-
-
+    # pdb.set_trace()
     for i in protein_seq_dict:  # and protein_fea_dict.has_key(protein) and RNA_fea_dict.has_key(RNA):
         protein_seq = translate_sequence(protein_seq_dict[i], group_dict)
         bpf_feature = BPF(protein_seq_dict[i])
@@ -445,7 +462,6 @@ def BPF(seq_temp):
             tem_vec = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1]
         fea = fea + tem_vec
     return fea
-
 """## Performance evaluation metrics"""
 
 def calculate_performace(test_num, pred_y, labels):
