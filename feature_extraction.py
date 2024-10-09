@@ -133,7 +133,7 @@ def Convert_Seq2CKSSCP(train_seq, gap1=8,gap2=4):
     y[y=='ACP']=1
     y[y=='non-ACP']=0
     y = to_categorical(y)
-    print('num pos:', sum(y[:,0]==1), 'num neg:', sum(y[:,0]==0))
+    print('num pos:', sum(y[:,1]==1), 'num neg:', sum(y[:,1]==0))
 
     ip = np.array(ip_feature)
     x = np.concatenate((x, ip), axis=1)
