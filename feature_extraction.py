@@ -7,23 +7,15 @@ Original file is located at
     https://colab.research.google.com/drive/1UQn2inv8X_9T-1qnsZajDz1jSovnbytf
 """
 
-from keras.models import Sequential
-from keras.layers import LSTM, Dense, Dropout, Activation, GRU, SimpleRNN
-from keras import initializers
-from keras.callbacks import ModelCheckpoint,TensorBoard
-from keras.optimizers import RMSprop
 import matplotlib.pyplot as plt
 from keras.utils import plot_model
-from lightgbm import LGBMClassifier
 from sklearn.metrics import roc_curve, auc
 from sklearn.model_selection import train_test_split
-import pickle
 import scipy.io as sio
 import numpy as np
 from numpy import linalg as la
 import argparse
 from keras.utils import to_categorical
-from sklearn.model_selection import KFold, StratifiedKFold
 
 ## Perfmetrics
 from sklearn.metrics import confusion_matrix
