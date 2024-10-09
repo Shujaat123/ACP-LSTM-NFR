@@ -523,3 +523,19 @@ def Calculate_Stats(y_actual,y_pred):
   bacc = balanced_accuracy_score(y_actual, y_pred)
   yi = yoden_index(y_actual, y_pred)
   return acc, sen, spe, f1, mcc, bacc, yi
+
+
+def load_seq_data(data_path,label):
+  dataset = pd.read_csv(data_path,names=None,index_col=0, header=None)
+  seq = []
+  sample_count = 0
+
+  for row in dataset.iterrows():
+    if(row[0]!='>'):
+      sample_count = sample_count +1
+      array = [label, row[0]]
+      name, sequence = array[0].split()[0], re.sub('[^ARNDCQEGHILKMFPSTWYV-]', '', ''.join(array[1:]).upper())
+      seq.append([name, sequence])
+
+  print('# of ' + label + ' samples',sample_count)
+  return seq
