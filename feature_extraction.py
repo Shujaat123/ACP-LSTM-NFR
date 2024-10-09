@@ -8,14 +8,15 @@ Original file is located at
 """
 
 import matplotlib.pyplot as plt
-from keras.utils import plot_model
 from sklearn.metrics import roc_curve, auc
 from sklearn.model_selection import train_test_split
+import pickle
 import scipy.io as sio
 import numpy as np
 from numpy import linalg as la
 import argparse
 from keras.utils import to_categorical
+from sklearn.model_selection import KFold, StratifiedKFold
 
 ## Perfmetrics
 from sklearn.metrics import confusion_matrix
@@ -31,7 +32,7 @@ import pandas as pd
 We use separate *txt* files for the sequence dataset
 """
 
-def prepare_feature_acp740_2(path):
+def load_sequences(path):
     path = path
     new_list=[]
     seq_list=[]
@@ -109,7 +110,7 @@ def Isoelectric_Point(seq):
 
     return ip_final
 
-def Convert_Seq2CKSSCP(train_seq, gap1=8,gap2=4):
+def proposed_features(train_seq, gap1=8,gap2=4):
     cksscpfea = []
     seq_label = []
     ip_feature=[]
@@ -362,7 +363,7 @@ def get_4_nucleotide_composition(tris, seq, pythoncount=True):
 
     return tri_feature
 
-def prepare_feature_acp740(path):
+def ACP_DL_feature(path):
     label = []
     interaction_pair = {}
     RNA_seq_dict = {}
