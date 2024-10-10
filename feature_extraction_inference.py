@@ -70,19 +70,22 @@ def Isoelectric_Point(seq):
 
 def proposed_features(train_seq, gap1=8,gap2=4):
     cksscpfea = []
+    seq_label = []
     ip_feature=[]
     for sseq in train_seq:
         temp= CKSSCP([sseq], gap1=gap1,gap2=gap2)
         cksscpfea.append(temp[1][1:])
+        seq_label.append(sseq[0])
         ip_feature.append(Isoelectric_Point(sseq[1]))
 
 
     x = np.array(cksscpfea)
-
+    y = np.array(seq_label)
 
     ip = np.array(ip_feature)
     x = np.concatenate((x, ip), axis=1)
-    return x
+    return x,y
+
 
 def SC_feature(aPair,bPair):
 
