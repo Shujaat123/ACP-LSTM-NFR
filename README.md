@@ -65,7 +65,7 @@ To use the code in this repository, follow these steps:
 2. In Jupter-installed environment load the ipybn file and install required packages as prompted.
 
 3. Make sure you have access to the following files:
-  - Dataset files (ACP344.csv and ACP740.csv) in the data/ directory
+  - Dataset files (ACP344.txt and ACP740.txt) in the data/ directory
   - Pretrained model weights in the best_model/ directory
 
 # Requirements
