@@ -133,13 +133,9 @@ The model was trained using the ACP344 and ACP740 datasets and achieved state-of
 If you use this repository or the provided datasets and models in your research, please cite the following paper:
 
 ```latex
-@article{ACP-LSTM-NFR,
+@article{your_paper_citation,
   title={Anticancer Peptides Classification Using Long-Short-Term Memory with Novel Feature Representation},
-  author={Nazer Al Tahifah, Muhammad Sohail Ibrahim, Erum Rehman, Naveed Ahmed, Abdul Wahab, Shujaat Khan},
+  author={Nazer Al Tahifah, Muhammad Sohail Ibrahim, Erum Rehman, Naveed Ahmed, Abdul Wahab, and Shujaat Khan},
   journal={IEEE Access},
-}
-
-  year={2024}
-}
-License
-This project is licensed under the MIT License - see the LICENSE file for details.
+  year={2024},
+  doi={10.1109/ACCESS
