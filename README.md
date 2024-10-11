@@ -1,5 +1,3 @@
-# Creating a markdown string for the README file
-readme_content = """
 # ACP-LSTM-NFR: Anticancer Peptides Classification Using Long-Short-Term Memory with Novel Feature Representation
 
 This repository contains the code and resources for the paper **"Anticancer Peptides Classification Using Long-Short-Term Memory with Novel Feature Representation"**. The project focuses on predicting anticancer peptides (ACPs) from peptide sequences using a Long-Short-Term Memory (LSTM)-based model with novel feature representations.
@@ -55,9 +53,93 @@ The best model weights are stored in the `best_model` folder:
 
 ## Installation
 
+The project is based on a light-weight model and you can easily run it on on Google-Colab. However, you can also download the local copy of the repository to perfor experiments locally.
+
 To use the code in this repository, follow these steps:
 
 1. Clone the repository:
    ```bash
    git clone https://github.com/Shujaat123/ACP-LSTM-NFR.git
    cd ACP-LSTM-NFR
+
+2. In Jupter-installed environment load the ipybn file and install required packages as prompted.
+
+3. Make sure you have access to the following files:
+  - Dataset files (ACP344.csv and ACP740.csv) in the data/ directory
+  - Pretrained model weights in the best_model/ directory
+
+# Requirements
+- Python 3.7+
+- Keras 2.4.3
+- TensorFlow 2.x
+- Pandas
+- NumPy
+- Openpyxl (for Excel export)
+- Jupyter Notebook
+
+# Files and Folders
+
+## 1. `Best_model/`:
+Contains pre-trained weights of the best LSTM model.
+
+## 2. `Data/`:
+Contains the dataset used in the study.
+
+## 3. `Notebooks/`:
+- **ACP_LSTM_NFP.ipynb**: Independent inference notebook. Users can upload their peptide sequences in FASTA format (.txt file) for classification. The model outputs the probabilities of the sequences being ACPs and allows users to download results in an Excel file.
+- **training_and_evalution.ipynb**: Contains the code for training and evaluating the model on the dataset.
+
+## 4. `Utilities/`:
+- **feature_extraction.py**: Code for extracting features used during training.
+- **feature_extraction_inference.py**: Utility code for feature extraction during inference.
+
+
+# Usage
+
+## Training and Evaluation
+To train the model and evaluate its performance, open the `training_and_evaluation.ipynb` notebook and run the cells. The training process includes:
+
+- Feature extraction from peptide sequences.
+- Model training with LSTM architecture.
+- Cross-validation and evaluation metrics.
+
+> You can modify parameters such as the number of epochs, batch size, or use your dataset in place of the provided datasets.
+
+## Inference
+To use the model for inference, open the `ACP_LSTM_NFP.ipynb` notebook. This notebook allows users to upload a `.txt` file containing peptide sequences in FASTA format and obtain the predicted probabilities of the sequences being ACPs.
+
+- Upload your FASTA sequences in a `.txt` file (e.g., `sample_seq.txt`).
+- The model will predict the probabilities of being ACP and non-ACP.
+- Results will be available for download as an Excel file.
+
+## Feature Extraction
+The repository includes two Python files that handle feature extraction:
+
+- **feature_extraction.py**: Contains the code for extracting features from peptide sequences during training.
+- **feature_extraction_inference.py**: Contains the code for feature extraction used during inference.
+
+The feature sets include:
+
+- Binary Profile.
+- $k$-mer Sparse Matrix.
+- Composition of the K-Spaced Side Chain Pairs (CKSSCP).
+- Composition of the K-Spaced Electrically Charged Side Chain Pairs (CKSECSCP).
+- Isoelectric Point Feature.
+
+## Results
+The model was trained using the ACP344 and ACP740 datasets and achieved state-of-the-art performance in terms of accuracy and MCC (Matthew's Correlation Coefficient). The trained models can be used to classify new peptide sequences with high reliability.
+
+## Citing
+If you use this repository or the provided datasets and models in your research, please cite the following paper:
+
+```latex
+@article{ACP-LSTM-NFR,
+  title={Anticancer Peptides Classification Using Long-Short-Term Memory with Novel Feature Representation},
+  author={Nazer Al Tahifah, Muhammad Sohail Ibrahim, Erum Rehman, Naveed Ahmed, Abdul Wahab, Shujaat Khan},
+  journal={IEEE Access},
+}
+
+  year={2024}
+}
+License
+This project is licensed under the MIT License - see the LICENSE file for details.
