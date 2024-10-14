@@ -85,11 +85,11 @@ Contains pre-trained weights of the best LSTM model.
 ## 2. `Data/`:
 Contains the dataset used in the study.
 
-## 3. `Notebooks/`:
+## 3. `Notebooks`:
 - **ACP_LSTM_NFP.ipynb**: Independent inference notebook. Users can upload their peptide sequences in FASTA format (.txt file) for classification. The model outputs the probabilities of the sequences being ACPs and allows users to download results in an Excel file.
 - **training_and_evalution.ipynb**: Contains the code for training and evaluating the model on the dataset.
 
-## 4. `Utilities/`:
+## 4. `Utilities`:
 - **feature_extraction.py**: Code for extracting features used during training.
 - **feature_extraction_inference.py**: Utility code for feature extraction during inference.
 
