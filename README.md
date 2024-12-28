@@ -130,12 +130,13 @@ The feature sets include:
 The model was trained using the ACP344 and ACP740 datasets and achieved state-of-the-art performance in terms of accuracy and MCC (Matthew's Correlation Coefficient). The trained models can be used to classify new peptide sequences with high reliability.
 
 ## Citing
-If you use this repository or the provided datasets and models in your research, please cite the following paper:
+If you use this repository or the provided datasets and models in your research, please cite the following paper: \\
 
+Nazer Al Tahifah, Muhammad Sohail Ibrahim, Erum Rehman, Naveed Ahmed, Abdul Wahab, Shujaat Khan. "Anticancer Peptides Classification Using Long-Short-Term Memory with Novel Feature Representation " IEEE Access, Volume X(X), December 2024, DOI: 10.1109/ACCESS.2024.3523068, online  https://ieeexplore.ieee.org/document/10816412
 ```latex
 @article{your_paper_citation,
   title={Anticancer Peptides Classification Using Long-Short-Term Memory with Novel Feature Representation},
   author={Nazer Al Tahifah, Muhammad Sohail Ibrahim, Erum Rehman, Naveed Ahmed, Abdul Wahab, and Shujaat Khan},
   journal={IEEE Access},
   year={2024},
-  doi={10.1109/ACCESS
+  doi={10.1109/ACCESS.2024.3523068}}
